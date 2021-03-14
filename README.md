@@ -2,7 +2,7 @@
 ##  requests
 
 * /get_users_cards
-* 
+
   type:
     get
   
