@@ -3,38 +3,33 @@
 
 * /get_users_cards
   type:
-  - get
+    get
   params:
-  - user_id
+    user_id
   describtion:
-  - get user's aviable cards by user's id
+    get user's aviable cards by user's id
 
 * /register
   type:
-  - post
+    post
   params:
-  - phone_number: string
-  - name : string
+    phone_number: string
+    name : string
   describtion:
-  - register new user
+    register new user
 
 * /get_all_users
-  
   type:
-  - get
-  
+    get
   params:
-  - no params provided
-  
+    no params provided
   describtion:
-  - return all users with related sales cards
+    return all users with related sales cards
   
 * /remove_user
   type:
-  - post
-  
+    post
   params:
   - user_id
-  
   describtion:
   - remove user from db with related cards
