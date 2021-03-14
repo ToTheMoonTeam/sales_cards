@@ -19,17 +19,22 @@
   register new user
 
 * /get_all_users
+  
   type:
     get
+  
   params:
     no params provided
+  
   describtion:
   return all users with related sales cards
   
-* /remove_ures
+* /remove_user
   type:
     post
+  
   params:
     user_id
+  
   describtion:
   remove user from db with related cards
