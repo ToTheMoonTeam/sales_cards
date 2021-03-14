@@ -54,7 +54,7 @@ def register():
     return resp
 
 
-@app.route('/get_all_users', methods=['get'])
+@app.route('/get_all_users', methods=['GET'])
 def get_all_users():
     try:
         users_cards = get_all_users_data()
@@ -91,5 +91,6 @@ def remove_user():
         }})
     resp.status_code = 200
     return resp
+
 
 app.run()
