@@ -45,12 +45,13 @@ def get_user_by_id(id):
 def get_all_users_data():
     session = Session()
     users = session.query(User).all()
-    users_cards = {}
+    users_data = {}
     for item in users:
         cards = get_cards_by_user(item.id)
-        users_cards[item.id] = [x.to_dict() for x in cards]
+        users_data[item.id] = item.to_dict()
+        users_data[item.id]["cards"] = [x.to_dict() for x in cards]
     session.close()
-    return users_cards
+    return users_data
 
 
 def remove_user_by_id(id):
