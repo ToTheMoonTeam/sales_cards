@@ -1,5 +1,6 @@
 import flask
 from flask import request, jsonify
+from flask_cors import CORS, cross_origin
 import logging
 
 from sqlalchemy.exc import ProgrammingError
@@ -13,7 +14,7 @@ logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
-
+CORS(app)
 
 @app.route('/get_users_cards', methods=['GET'])
 def get_users_card():
