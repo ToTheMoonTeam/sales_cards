@@ -2,6 +2,8 @@ import flask
 from flask import request, jsonify
 import logging
 
+from sqlalchemy.exc import ProgrammingError
+
 from app.src.common.common import no_request_argument_provided_error, wrong_type_argument_provided
 from orm.src.requests import get_cards_by_user, add_user, get_user_by_id, get_all_users_data, remove_user_by_id, \
     add_sales_card, get_card_by_id, link_sales_card_to_user, get_all_cards_data
@@ -81,6 +83,11 @@ def register_card():
 def get_all_users():
     try:
         users_cards = get_all_users_data()
+    except ProgrammingError as e:
+        logger.error(e)
+        resp = jsonify({"body": "Empty database"})
+        resp.status_code = 422
+        return resp
     except Exception as e:
         logger.error(e)
         resp = jsonify({"body": str(e)})
@@ -98,6 +105,12 @@ def get_all_users():
 def get_all_cards():
     try:
         cards_data = get_all_cards_data()
+    except ProgrammingError as e:
+        logger.error(e)
+        resp = jsonify({"body": "Empty database"})
+        resp.status_code = 422
+        return resp
+
     except Exception as e:
         logger.error(e)
         resp = jsonify({"body": str(e)})
@@ -117,9 +130,14 @@ def remove_user():
     for item in request_keys:
         if item not in request.args:
             return no_request_argument_provided_error(item)
-    remove_user_by_id(request.args[request_keys[0]])
+
     try:
         remove_user_by_id(request.args[request_keys[0]])
+    except ProgrammingError as e:
+        logger.error(e)
+        resp = jsonify({"body": "Empty database"})
+        resp.status_code = 422
+        return resp
     except Exception as e:
         logger.error(e)
         resp = jsonify({"body": str(e)})
@@ -139,9 +157,14 @@ def link_card():
     for item in request_keys:
         if item not in request.args:
             return no_request_argument_provided_error(item)
-    link_sales_card_to_user(request.args)
+
     try:
         link_sales_card_to_user(request.args)
+    except ProgrammingError as e:
+        logger.error(e)
+        resp = jsonify({"body": "Empty database"})
+        resp.status_code = 422
+        return resp
     except Exception as e:
         logger.error(e)
         resp = jsonify({"body": str(e)})
