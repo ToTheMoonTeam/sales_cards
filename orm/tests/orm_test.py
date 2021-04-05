@@ -1,6 +1,6 @@
 from pprint import pprint
 
-from orm.schemas.base import Base, engine, Session
+from orm.schemas.base import Base, engine, Session, session_manager
 from orm.schemas.sales_cards import User, SalesCard
 
 
@@ -9,36 +9,33 @@ def create_all():
 
 
 def fill_user():
-    session = Session()
+    with session_manager() as session:
 
-    test_user = User("+79811207498", "vasily")
-    session.add(test_user)
+        test_user = User("+79811207498", "vasily")
+        session.add(test_user)
 
-    session.commit()
-    session.close()
+        session.commit()
 
 
 def fill_card():
-    session = Session()
-    for c_id in [1, 2, 3]:
-        test_card = SalesCard(id=c_id, company_name=f"testCompany{c_id}", sale=0.5)
-        test_card.user_id = 1
-        session.add(test_card)
-        session.commit()
-    session.close()
+    with session_manager() as session:
+        for c_id in [1, 2, 3]:
+            test_card = SalesCard(id=c_id, company_name=f"testCompany{c_id}", sale=0.5)
+            test_card.user_id = 1
+            session.add(test_card)
+            session.commit()
 
 
 def get_all():
-    session = Session()
-    users = session.query(User).filter_by(id=0).all()
-    sales_cards = session.query(SalesCard).all()
-    session.close()
+    with session_manager() as session:
+        users = session.query(User).filter_by(id=0).all()
+        sales_cards = session.query(SalesCard).all()
     return users, sales_cards
 
 
 def get_cards_linked_to_user():
-    session = Session()
-    sales_cards = session.query(SalesCard).filter_by(user_id=1).all()
+    with session_manager() as session:
+        sales_cards = session.query(SalesCard).filter_by(user_id=1).all()
     return sales_cards
 
 
