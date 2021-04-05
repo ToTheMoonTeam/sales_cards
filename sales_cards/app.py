@@ -5,14 +5,10 @@ import logging
 
 from sqlalchemy.exc import ProgrammingError
 
-
 from sales_cards.orm.src.requests import get_cards_by_user, add_user, get_user_by_id, add_sales_card, get_card_by_id, \
     get_all_users_data, get_all_cards_data, remove_user_by_id, link_sales_card_to_user
 
-
-
 from sales_cards.src.common.common import no_request_argument_provided_error
-
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
@@ -20,6 +16,11 @@ logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 CORS(app)
+
+
+@app.route('/', methods=['GET'])
+def test():
+    return jsonify({"body": "We are alive!"})
 
 
 @app.route('/get_users_cards', methods=['GET'])
