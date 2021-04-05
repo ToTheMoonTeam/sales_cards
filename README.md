@@ -1,7 +1,7 @@
 # sales_cards
 ##  requests
 
-* /get_users_cards
+### /get_users_cards
 
   type:
     get
@@ -14,7 +14,7 @@
   
   can get message: empty database if db is empty
 
-* /register
+### /register
   
   type:
     post
@@ -31,7 +31,7 @@
   
   return users's data after registration
   
-* /get_all_users
+### /get_all_users
   
   type:
     get
@@ -44,7 +44,8 @@
     
   can get message: empty database if db is empty
 flask_cors
-* /remove_user
+
+### /remove_user
   
   type:
     post
@@ -57,7 +58,7 @@ flask_cors
   
   can get message: empty database if db is empty
 
-* /register_card
+### /register_card
 
   type: 
     post
@@ -72,7 +73,7 @@ flask_cors
     
   can get message: empty database if db is empty
   
-* get_all_cards
+### get_all_cards
   
   type:
     get
@@ -85,7 +86,7 @@ flask_cors
     
   can get message: empty database if db is empty
 
-* link card
+### link card
   
   type:
     post
