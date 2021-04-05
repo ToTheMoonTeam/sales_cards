@@ -1,6 +1,6 @@
 import flask
 from flask import request, jsonify
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 import logging
 
 from sqlalchemy.exc import ProgrammingError
