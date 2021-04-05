@@ -2,8 +2,8 @@ import logging
 
 from sqlalchemy import func
 
-from app.orm.schemas.base import Session
-from app.orm.schemas.sales_cards import SalesCard, User
+from sales_cards.orm.schemas.base import Session
+from sales_cards.orm.schemas.sales_cards import SalesCard, User
 
 logger = logging.getLogger(__name__)
 
