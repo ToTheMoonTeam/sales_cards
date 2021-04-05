@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, ForeignKey, String, Float, DateTime
 from sqlalchemy.orm import relationship
-from app.orm.schemas.base import Base
+from sales_cards.orm.schemas.base import Base
 
 
 class User(Base):
