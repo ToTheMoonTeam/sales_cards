@@ -1,13 +1,18 @@
 import flask
 from flask import request, jsonify
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 import logging
 
 from sqlalchemy.exc import ProgrammingError
 
-from app.src.common.common import no_request_argument_provided_error, wrong_type_argument_provided
-from orm.src.requests import get_cards_by_user, add_user, get_user_by_id, get_all_users_data, remove_user_by_id, \
-    add_sales_card, get_card_by_id, link_sales_card_to_user, get_all_cards_data
+
+from sales_cards.orm.src.requests import get_cards_by_user, add_user, get_user_by_id, add_sales_card, get_card_by_id, \
+    get_all_users_data, get_all_cards_data, remove_user_by_id, link_sales_card_to_user
+
+
+
+from sales_cards.src.common.common import no_request_argument_provided_error
+
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
@@ -15,6 +20,7 @@ logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 CORS(app)
+
 
 @app.route('/get_users_cards', methods=['GET'])
 def get_users_card():
@@ -30,7 +36,8 @@ def get_users_card():
         return resp
     resp = jsonify({
         "body": {
-            "cards": {i: data.to_dict() for i, data in zip(range(len(cards)), cards)}
+            "cards":
+                {i: data.to_dict() for i, data in zip(range(len(cards)), cards)}
         }})
     resp.status_code = 200
     return resp

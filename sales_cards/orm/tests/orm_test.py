@@ -1,7 +1,7 @@
 from pprint import pprint
 
-from orm.schemas.base import Base, engine, Session
-from orm.schemas.sales_cards import User, SalesCard
+from app.orm.schemas.base import Base, engine, Session
+from app.orm import User, SalesCard
 
 
 def create_all():
@@ -20,8 +20,8 @@ def fill_user():
 
 def fill_card():
     session = Session()
-    for c_id in [1, 2, 3]:
-        test_card = SalesCard(id=c_id, company_name=f"testCompany{c_id}", sale=0.5)
+    for _ in range(3):
+        test_card = SalesCard(company_name=f"testCompany{_}", sale=0.5)
         test_card.user_id = 1
         session.add(test_card)
         session.commit()
@@ -53,6 +53,6 @@ def test_orm():
 
 # WARNING : will clear all database
 # TODO: create database for tests
-#Base.metadata.drop_all(bind=engine, tables=[User.__table__, SalesCard.__table__])
-
-test_orm()
+Base.metadata.drop_all(bind=engine, tables=[User.__table__, SalesCard.__table__])
+create_all()
+#test_orm()

@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, ForeignKey, String, Float, DateTime
 from sqlalchemy.orm import relationship
-from orm.schemas.base import Base
+from app.orm.schemas.base import Base
 
 
 class User(Base):
@@ -46,6 +46,7 @@ class SalesCard(Base):
         self.company_name = company_name
         self.sale = sale
         self.schema = self.__tablename__
+
     def to_dict(self):
         return {
             "id": self.id,
