@@ -1,7 +1,7 @@
 from pprint import pprint
 
-from app.orm.schemas.base import Base, engine, Session
-from app.orm import User, SalesCard
+from sales_cards.orm.schemas.base import Base, engine, Session
+from sales_cards.orm import User, SalesCard
 
 
 def create_all():
