@@ -7,7 +7,7 @@
     get
   
   params:
-    - user_id
+  - user_id
   
   describtion:
     get user's aviable cards by user's id and users's data
@@ -20,11 +20,11 @@
     post
   
   params:
-    - phone_number: string
-    - name : string
-    - birthday : datetime
-    - work_quality : integer
-    - shipping_quality : integer
+  - phone_number: string
+  - name : string
+  - birthday : datetime
+  - work_quality : integer
+  - shipping_quality : integer
   
   describtion:
     register new user
@@ -37,7 +37,7 @@
     get
   
   params:
-    - no params provided
+  - no params provided
   
   describtion:
     return all users with related sales cards
@@ -64,9 +64,9 @@ flask_cors
     post
   
   params:
-    - company_name: string
-    - sale: double
-    - id(optional): int manualy added id or auto-incremented
+  - company_name: string
+  - sale: double
+  - id(optional): int manualy added id or auto-incremented
 
   describtion:
     return all cards
@@ -79,7 +79,7 @@ flask_cors
     get
   
   params:
-    - no params provided
+  - no params provided
   
   describtion:
     return all cards 
@@ -92,8 +92,8 @@ flask_cors
     post
     
   params:
-    - user_id: int
-    - card_id: int
+  - user_id: int
+  - card_id: int
   
   describtion:
     link sales card to user
