@@ -5,16 +5,16 @@ import logging
 
 from sqlalchemy.exc import ProgrammingError
 
-from app.src.common.common import no_request_argument_provided_error, wrong_type_argument_provided
-from orm.src.requests import get_cards_by_user, add_user, get_user_by_id, get_all_users_data, remove_user_by_id, \
+from web.src.common.common import no_request_argument_provided_error
+from web.orm.src.requests import get_cards_by_user, add_user, get_user_by_id, get_all_users_data, remove_user_by_id, \
     add_sales_card, get_card_by_id, link_sales_card_to_user, get_all_cards_data
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 
 app = flask.Flask(__name__)
-app.config["DEBUG"] = True
 CORS(app)
+
 
 @app.route('/get_users_cards', methods=['GET'])
 def get_users_card():

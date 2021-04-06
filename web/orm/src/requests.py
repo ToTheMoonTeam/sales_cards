@@ -2,8 +2,8 @@ import logging
 
 from sqlalchemy import func
 
-from orm.schemas.base import session_manager
-from orm.schemas.sales_cards import User, SalesCard
+from web.orm.schemas.base import session_manager
+from web.orm.schemas.sales_cards import User, SalesCard
 
 logger = logging.getLogger(__name__)
 
@@ -29,8 +29,11 @@ def add_sales_card(params):
     """
     with session_manager() as session:
         if "id" not in params:
-            max_id = session.query(func.max(SalesCard.id)).one()
-            generated_id = str(max_id[0] + 1)
+            max_id = session.query(func.max(SalesCard.id)).one()[0]
+            if max_id is None:
+                generated_id = 1
+            else:
+                generated_id = str(max_id[0] + 1)
 
         else:
             generated_id = params["id"]

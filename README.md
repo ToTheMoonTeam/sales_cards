@@ -99,3 +99,7 @@ flask_cors
     link sales card to user
     return card and user that was linked
   
+
+### docker
+
+1. ```docker-machine create -d virtualbox dev;```
