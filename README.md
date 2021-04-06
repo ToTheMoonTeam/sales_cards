@@ -3,43 +3,43 @@
 
 ### /get_users_cards
 
-  type:
+  **type:**
     get
   
-  params:
+  **params:**
   - user_id
   
-  describtion:
+  **describtion:**
     get user's aviable cards by user's id and users's data
   
   can get message: empty database if db is empty
 
 ### /register
   
-  type:
+  **type:**
     post
   
-  params:
+ **params:**
   - phone_number: string
   - name : string
   - birthday : datetime
   - work_quality : integer
   - shipping_quality : integer
   
-  describtion:
+  **describtion:**
     register new user
   
   return users's data after registration
   
 ### /get_all_users
   
-  type:
+  **type:**
     get
   
-  params:
+  **params:**
   - no params provided
   
-  describtion:
+  **describtion:**
     return all users with related sales cards
     
   can get message: empty database if db is empty
@@ -47,55 +47,55 @@ flask_cors
 
 ### /remove_user
   
-  type:
+  **type:**
     post
   
-  params:
+  **params:**
   - user_id
   
-  describtion:
+  **describtion:**
   - remove user from db with related cards
   
   can get message: empty database if db is empty
 
 ### /register_card
 
-  type: 
+  **type:**
     post
   
-  params:
+  **params:**
   - company_name: string
   - sale: double
   - id(optional): int manualy added id or auto-incremented
 
-  describtion:
+  **describtion:**
     return all cards
     
   can get message: empty database if db is empty
   
-### get_all_cards
+### /get_all_cards
   
-  type:
+  **type:**
     get
   
-  params:
+  **params:**
   - no params provided
   
-  describtion:
+  **describtion:**
     return all cards 
     
   can get message: empty database if db is empty
 
-### link card
+### /link_card
   
-  type:
+  **type:**
     post
     
-  params:
+  **params:**
   - user_id: int
   - card_id: int
   
-  describtion:
+  **describtion:**
     link sales card to user
     return card and user that was linked
   
