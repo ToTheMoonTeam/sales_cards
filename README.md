@@ -72,7 +72,7 @@ can get message: empty database if db is empty
     
 can get message: empty database if db is empty
 
-### /link_card
+## /link_card
   
 **type:** post
     
