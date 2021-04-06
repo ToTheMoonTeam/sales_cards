@@ -42,7 +42,7 @@ flask_cors
 **type:** post
   
 **params:**
-  - user_id
+  - id
   
 **describtion:** remove user from db with related cards
   
