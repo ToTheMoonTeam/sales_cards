@@ -81,5 +81,6 @@ can get message: empty database if db is empty
   - card_id: int
   
 **describtion:** link sales card to user
+
 return card and user that was linked
   
