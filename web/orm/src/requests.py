@@ -33,7 +33,7 @@ def add_sales_card(params):
             if max_id is None:
                 generated_id = 1
             else:
-                generated_id = str(max_id[0] + 1)
+                generated_id = str(max_id + 1)
 
         else:
             generated_id = params["id"]
