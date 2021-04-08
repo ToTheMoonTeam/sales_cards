@@ -1,13 +1,13 @@
 import flask
-from flask import request, jsonify
+from flask import request, jsonify, send_file
 from flask_cors import CORS
 import logging
 
 from sqlalchemy.exc import ProgrammingError
 
-from web.src.common.common import no_request_argument_provided_error
+from web.src.common.common import no_request_argument_provided_error, generate_excele
 from web.orm.src.requests import get_cards_by_user, add_user, get_user_by_id, get_all_users_data, remove_user_by_id, \
-    add_sales_card, get_card_by_id, link_sales_card_to_user, get_all_cards_data
+    add_sales_card, get_card_by_id, link_sales_card_to_user, get_all_cards_data, get_all_users_data_to_excele
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
@@ -179,6 +179,19 @@ def link_card():
         }})
     resp.status_code = 200
     return resp
+
+
+@app.route('/export_excele', methods=['GET'])
+def export_excele():
+    try:
+        generate_excele(get_all_users_data_to_excele())
+    except Exception as e:
+        logger.error(e)
+        resp = jsonify({"body": str(e)})
+        resp.status_code = 422
+        return resp
+
+    return send_file("AllUsers.xlsx")
 
 
 app.run()

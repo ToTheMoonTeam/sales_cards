@@ -64,7 +64,6 @@ def add_user(params):
     :return: id of registred user
     """
     with session_manager() as session:
-
         test_user = User(phone_number=params["phone_number"],
                          name=params["name"],
                          birthday=params["birthday"],
@@ -151,3 +150,15 @@ def link_sales_card_to_user(params):
         user[0].sales_cards.append(card[0])
         session.commit()
 
+
+def get_all_users_data_to_excele():
+    with session_manager() as session:
+        users = session.query(User).all()
+        users_data = []
+        for item in users:
+            cards = get_cards_by_user(item.id)
+            tmp_data = list(item.to_dict().values())
+            tmp_data += [x.id for x in cards]
+            users_data.append(tmp_data)
+
+    return users_data
