@@ -12,7 +12,7 @@ class User(Base):
     work_quality = Column(Integer)
     shipping_quality = Column(Integer)
     phone_number = Column(String, nullable=False)
-    sales_cards = relationship('SalesCard')
+    sales_cards = relationship('SalesCardExemplar')
 
     def __init__(self, name, phone_number, birthday, work_quality, shipping_quality):
         self.name = name
@@ -39,13 +39,34 @@ class SalesCard(Base):
     id = Column(Integer, primary_key=True)
     company_name = Column(String)
     sale = Column(Float)
-    user_id = Column(Integer, ForeignKey('User.id', onupdate="SET NULL", ondelete="SET NULL"))
 
     def __init__(self, id, company_name, sale):
         self.id = id
         self.company_name = company_name
         self.sale = sale
         self.schema = self.__tablename__
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "company_name": self.company_name,
+            "sale": self.sale,
+        }
+
+
+class SalesCardExemplar(Base):
+    __tablename__ = 'SalesCardExemplar'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    company_name = Column(String)
+    sale = Column(Float)
+    user_id = Column(Integer, ForeignKey('User.id', onupdate="SET NULL", ondelete="SET NULL"))
+
+    def __init__(self, SalesCard):
+        self.company_name = SalesCard.company_name
+        self.sale = SalesCard.sale
+        self.schema = self.__tablename__
+
     def to_dict(self):
         return {
             "id": self.id,
