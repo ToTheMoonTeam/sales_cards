@@ -129,7 +129,7 @@ def remove_user_by_id(id):
             logger.warning("try to deletу not existed user")
         elif to_remove_user is not None:
             to_remove_user = to_remove_user[0]
-            linked_cards = session.query(SalesCard).filter_by(user_id=to_remove_user.id).all()
+            linked_cards = session.query(SalesCardExemplar).filter_by(user_id=to_remove_user.id).all()
             for item in linked_cards:
                 if item is not None:
                     session.delete(item)
