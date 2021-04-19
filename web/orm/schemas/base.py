@@ -2,9 +2,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from contextlib import contextmanager
-
 from .config import BaseConfig
 
+url = BaseConfig.SQLALCHEMY_DATABASE_URI.split('postgres://')[1]
+engine = create_engine('postgresql+psycopg2://{}'.format(url),
+                       convert_unicode=True, encoding='utf8')
 engine = create_engine(BaseConfig.SQLALCHEMY_DATABASE_URI)
 Session = sessionmaker(bind=engine)
 

@@ -50,6 +50,6 @@ def test_orm():
 
 # WARNING : will clear all database
 # TODO: create database for tests
-#Base.metadata.drop_all(bind=engine, tables=[User.__table__, SalesCard.__table__])
+Base.metadata.drop_all(bind=engine, tables=[User.__table__, SalesCard.__table__])
 
-test_orm()
+#test_orm()

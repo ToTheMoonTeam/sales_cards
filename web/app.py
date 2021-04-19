@@ -2,18 +2,26 @@ import flask
 from flask import request, jsonify, send_file
 from flask_cors import CORS
 import logging
-
+import os
 from sqlalchemy.exc import ProgrammingError
 
 from src.common.common import no_request_argument_provided_error, generate_excele
 from orm.src.requests import get_cards_by_user, add_user, get_user_by_id, get_all_users_data, remove_user_by_id, \
     add_sales_card, get_card_by_id, link_sales_card_to_user, get_all_cards_data, get_all_users_data_to_excele
+from create_db import init_db
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 
 app = flask.Flask(__name__)
-CORS(app)
+
+
+# CORS(app)
+
+
+@app.route('/', methods=['GET'])
+def alive_checks():
+    return "We are alive!"
 
 
 @app.route('/get_users_cards', methods=['GET'])
@@ -195,4 +203,5 @@ def export_excele():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    init_db()
+    app.run(debug = True, host = '0.0.0.0')
