@@ -3,7 +3,7 @@ import logging
 from sqlalchemy import func
 
 from ..schemas.base import session_manager
-from ..schemas.sales_cards import User, SalesCard
+from ..schemas.sales_cards import User, SalesCard, SalesCardExemplar
 
 logger = logging.getLogger(__name__)
 
@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 def get_cards_by_user(user_id):
     with session_manager() as session:
         try:
-            sales_cards = session.query(SalesCard).filter_by(user_id=user_id).all()
+            sales_cards = session.query(SalesCardExemplar).filter_by(user_id=user_id).all()
             return sales_cards
 
         except Exception as e:
@@ -146,8 +146,11 @@ def link_sales_card_to_user(params):
 
         user = session.query(User).filter_by(id=user_id).all()
         card = session.query(SalesCard).filter_by(id=card_id).all()
+        card_example = SalesCardExemplar(card[0])
         assert len(user) == 1 and len(card) == 1
-        user[0].sales_cards.append(card[0])
+        user[0].sales_cards.append(card_example)
+        session.add(card_example)
+        session.flush()
         session.commit()
 
 
