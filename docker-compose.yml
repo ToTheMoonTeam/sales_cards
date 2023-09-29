@@ -3,9 +3,9 @@ version: '3'
 services:
   web:
     restart: always
-    build: ./web
+    build: .
     ports:
-      - "5000:5000"
+      - "8080:8080"
     depends_on:
       - sales_cards
     env_file:
@@ -16,8 +16,9 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/sales_cards
     environment:
-      - POSTGRES_USER:admin
-      - POSTGRES_PASSWORD:admin
+      POSTGRES_DB: "sales_cards"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
     ports:
       - "5432:5432"
 
